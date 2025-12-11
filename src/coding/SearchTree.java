@@ -1,14 +1,16 @@
-public class SearchTree {
+package coding;
 
-    // -------------------------
-    // A. TreeNode Structure
-    // -------------------------
-    private class TreeNode {
+public class SearchTree
+{    
+    // TreeNode Structure
+    private class TreeNode
+    {
         int value;
         TreeNode left;
         TreeNode right;
 
-        TreeNode(int value) {
+        TreeNode(int value)
+        {
             this.value = value;
             left = null;
             right = null;
@@ -17,16 +19,17 @@ public class SearchTree {
 
     private TreeNode root;
 
-    // -------------------------
-    // B. Core BST Operations
-    // -------------------------
+    
+    // Core BST Operations
 
     // INSERT
-    public void insert(int value) {
-        root = insertRecursive(root, value);
+    public void insert(int value)
+    {
+        root = insertRecursive(root, value);     // Needed some help here
     }
 
-    private TreeNode insertRecursive(TreeNode node, int value) {
+    private TreeNode insertRecursive(TreeNode node, int value)
+    {
         if (node == null)
             return new TreeNode(value);
 
@@ -40,11 +43,13 @@ public class SearchTree {
     }
 
     // SEARCH
-    public boolean search(int value) {
+    public boolean search(int value)
+    {
         return searchRecursive(root, value);
     }
 
-    private boolean searchRecursive(TreeNode node, int value) {
+    private boolean searchRecursive(TreeNode node, int value)
+    {
         if (node == null)
             return false;
 
@@ -58,19 +63,26 @@ public class SearchTree {
     }
 
     // DELETE
-    public void delete(int value) {
+    public void delete(int value)
+    {
         root = deleteRecursive(root, value);
     }
 
-    private TreeNode deleteRecursive(TreeNode node, int value) {
+    private TreeNode deleteRecursive(TreeNode node, int value)
+    {
         if (node == null)
             return null;
 
-        if (value < node.value) {
+        if (value < node.value) // Yeah, so this part was a little confusing, but I understand it, I think
+        {
             node.left = deleteRecursive(node.left, value);
-        } else if (value > node.value) {
+        }
+        else if (value > node.value)
+        {
             node.right = deleteRecursive(node.right, value);
-        } else {
+        }
+        else
+        {
             // Case 1: No child
             if (node.left == null && node.right == null)
                 return null;
@@ -81,7 +93,7 @@ public class SearchTree {
             if (node.right == null)
                 return node.left;
 
-            // Case 3: Two children (inorder successor)
+            // Case 3: Two children (in order successor)
             node.value = findMin(node.right);
             node.right = deleteRecursive(node.right, node.value);
         }
@@ -89,79 +101,90 @@ public class SearchTree {
         return node;
     }
 
-    private int findMin(TreeNode node) {
+    private int findMin(TreeNode node)
+    {
         while (node.left != null)
             node = node.left;
         return node.value;
     }
 
-    // -------------------------
     // Traversals
-    // -------------------------
 
-    public void inorderTraversal() {
+    public void inorderTraversal()
+    {
         inorderRecursive(root);
         System.out.println();
     }
 
-    private void inorderRecursive(TreeNode node) {
-        if (node != null) {
+    private void inorderRecursive(TreeNode node) // Okay, why are these recurvise so confusion!? I don't get it.
+    {
+        if (node != null)
+        {
             inorderRecursive(node.left);
             System.out.print(node.value + " ");
             inorderRecursive(node.right);
         }
     }
 
-    public void reverseOrderTraversal() {
+    public void reverseOrderTraversal()
+    {
         reverseRecursive(root);
         System.out.println();
     }
 
-    private void reverseRecursive(TreeNode node) {
-        if (node != null) {
+    private void reverseRecursive(TreeNode node)
+    {
+        if (node != null)
+        {
             reverseRecursive(node.right);
             System.out.print(node.value + " ");
             reverseRecursive(node.left);
         }
     }
 
-    public void preorderTraversal() {
+    public void preorderTraversal()
+    {
         preorderRecursive(root);
         System.out.println();
     }
 
-    private void preorderRecursive(TreeNode node) {
-        if (node != null) {
+    private void preorderRecursive(TreeNode node)
+    {
+        if (node != null)
+        {
             System.out.print(node.value + " ");
             preorderRecursive(node.left);
             preorderRecursive(node.right);
         }
     }
 
-    public void postorderTraversal() {
+    public void postorderTraversal()
+    {
         postorderRecursive(root);
         System.out.println();
     }
 
-    private void postorderRecursive(TreeNode node) {
-        if (node != null) {
+    private void postorderRecursive(TreeNode node)
+    {
+        if (node != null)
+        {
             postorderRecursive(node.left);
             postorderRecursive(node.right);
             System.out.print(node.value + " ");
         }
     }
 
-    // -------------------------
     // HEIGHT
-    // -------------------------
     // Empty tree height = -1
-    public int getHeight() {
+    public int getHeight()
+    {
         return heightRecursive(root);
     }
 
-    private int heightRecursive(TreeNode node) {
+    private int heightRecursive(TreeNode node)
+    {
         if (node == null)
             return -1;
-        return 1 + Math.max(heightRecursive(node.left), heightRecursive(node.right));
+        return 1 + Math.max(heightRecursive(node.left), heightRecursive(node.right)); // getting everything together needed some help
     }
 }
